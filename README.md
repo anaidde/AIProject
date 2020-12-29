@@ -7,15 +7,15 @@
 * Mihaela-Diana Pascariu (3B6)  
 * Robert-Pavel Sucurei (3B4)
 
-###1. Introduction
+### 1. Introduction
 
 *To Be Completed*
 
-###2. Tweepy and collecting data from Twitter
+### 2. Tweepy and collecting data from Twitter
 
 *To Be Completed-Laur*
 
-###3. Bucketing
+### 3. Bucketing
 
 According to the documentation, we created buckets for followers, friends, listed, favourites, statuses and time.
 
