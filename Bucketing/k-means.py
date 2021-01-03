@@ -2,6 +2,7 @@ import json
 import numpy as np
 import kmeans1d
 from textblob import TextBlob
+from textblob import Blobber
 from textblob.sentiments import NaiveBayesAnalyzer
 from datetime import datetime
 
@@ -43,15 +44,14 @@ def make_array_of_int(arr):
 
 def make_json_data_file(fc, frc, lc, fac, sc, rt, txt, date):
     file_data = {"features": []}
+    tb = Blobber(analyzer=NaiveBayesAnalyzer())
 
     for index in range(0, len(fc)):
         analysis = TextBlob(txt[index]).sentiment
-        blob_obj = TextBlob(txt[index], analyzer=NaiveBayesAnalyzer())
 
-        sentiment_analysis = blob_obj.sentiment
-        print(sentiment_analysis)
+        sentiment_analysis = tb(txt[index]).sentiment
 
-        print("sentiment analisys: ", sentiment_analysis[0])
+        print(index)
 
         objectivity = 1 - analysis[1]
 
