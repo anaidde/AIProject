@@ -12,26 +12,26 @@ def create_lists():
 
     json_content = json.load(json_file)
 
-    fc_l = []
-    frc_l = []
-    lc_l = []
-    fac_l = []
-    sc_l = []
-    rt_l = []
-    text_l = []
-    time_l = []
+    followers_count_list = []
+    friends_count_list = []
+    listed_count_list = []
+    favourites_count_list = []
+    statuses_count_list = []
+    number_of_retweets_list = []
+    tweet_text_list = []
+    created_at_list = []
 
     for i in json_content["tweets"]:
-        fc_l.append(i["u"]["fc"])
-        frc_l.append(i["u"]["frc"])
-        lc_l.append(i["u"]["lc"])
-        fac_l.append(i["u"]["fac"])
-        sc_l.append(i["u"]["sc"])
-        rt_l.append((i["rt"]))
-        text_l.append(i["t"])
-        time_l.append(i["ca"])
+        followers_count_list.append(i["u"]["fc"])
+        friends_count_list.append(i["u"]["frc"])
+        listed_count_list.append(i["u"]["lc"])
+        favourites_count_list.append(i["u"]["fac"])
+        statuses_count_list.append(i["u"]["sc"])
+        number_of_retweets_list.append((i["rt"]))
+        tweet_text_list.append(i["t"])
+        created_at_list.append(i["ca"])
 
-    return fc_l, frc_l, lc_l, fac_l, sc_l, rt_l, text_l, time_l
+    return followers_count_list, friends_count_list, listed_count_list, favourites_count_list, statuses_count_list, number_of_retweets_list, tweet_text_list, created_at_list
 
 
 def make_array_of_int(arr):
@@ -93,7 +93,7 @@ if __name__ == "__main__":
 
     print(date_list)
 
-    k = 11
+    k = 30
 
     fc_array = np.array(fc_list)
     fc_clusters, fc_centroids = kmeans1d.cluster(fc_array, k)
@@ -148,3 +148,14 @@ if __name__ == "__main__":
                         rt_list,
                         text_list,
                         date_list)
+
+    # added
+    centroids = {"fc_centroids": make_array_of_int(fc_centroids),
+                 "frc_centroids": make_array_of_int(frc_centroids),
+                 "lc_centroids": make_array_of_int(lc_centroids),
+                 "fac_centroids": make_array_of_int(fac_centroids),
+                 "sc_centroids": make_array_of_int(sc_centroids)
+                 }
+
+    with open('centroidsTweets.json', 'w') as centroid_file:
+        json.dump(centroids, centroid_file)
